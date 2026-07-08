@@ -7,6 +7,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ src/
+# Static UI served at /
 COPY scripts/ scripts/
 COPY data/ data/
 COPY models/ models/
