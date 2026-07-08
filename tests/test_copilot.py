@@ -25,11 +25,11 @@ def _shipment_id_of(customer: str) -> str:
 
 def test_intent_classification_five_sample_questions():
     cases = {
-        "Tóm tắt contract customer A.": "knowledge_search",
-        "Shipment SHP_00001 có nguy cơ delay không?": "ml_prediction",
-        "Top 5 shipment có risk cao nhất hôm nay là gì?": "batch_query",
-        "Gửi email cho customer A báo shipment sẽ trễ 3 ngày.": "dangerous_action",
-        "Tạo báo cáo cho khách hàng đó.": "missing_info",
+        "Summarize the contract of customer A.": "knowledge_search",
+        "Does shipment SHP_00001 have delay risk?": "ml_prediction",
+        "Top 5 shipments with highest delay risk today?": "batch_query",
+        "Send email to customer A about a 3-day shipment delay.": "dangerous_action",
+        "Create a report for that customer.": "missing_info",
     }
     for message, expected in cases.items():
         assert classify_intent_rules(message) == expected, message
@@ -37,7 +37,7 @@ def test_intent_classification_five_sample_questions():
 
 def test_ml_prediction_route_returns_real_model_output():
     shipment_id = _shipment_id_of("CUS_A")
-    result = run_copilot("ops_001", f"Shipment {shipment_id} có nguy cơ delay không?", "req_t1")
+    result = run_copilot("ops_001", f"Does shipment {shipment_id} have delay risk?", "req_t1")
     assert result["intent"] == "ml_prediction"
     assert result["status"] == "ok"
     assert result["prediction"]["model_version"] in {"v1", "v2"}
@@ -45,14 +45,13 @@ def test_ml_prediction_route_returns_real_model_output():
 
 
 def test_batch_query_is_row_level_filtered():
-    result = run_copilot("sales_001", "Top 5 shipment risk cao nhất hôm nay?", "req_t2")
+    result = run_copilot("sales_001", "Top 5 shipments with highest risk today?", "req_t2")
     assert result["intent"] == "batch_query"
-    # sales_001 only has CUS_A access — no other customer may appear
     assert all(row["customer_id"] == "CUS_A" for row in result["batch_rows"])
 
 
 def test_dangerous_action_creates_draft_never_sends():
-    result = run_copilot("ops_001", "Gửi email cho customer A báo shipment sẽ trễ 3 ngày.", "req_t3")
+    result = run_copilot("ops_001", "Send email to customer A about a 3-day shipment delay.", "req_t3")
     assert result["intent"] == "dangerous_action"
     assert result["status"] == "pending_approval"
     draft = draft_store.get(result["draft_id"])
@@ -66,7 +65,6 @@ def test_approval_flow(client):
     draft_id = chat.json()["draft_id"]
     assert chat.json()["status"] == "pending_approval"
 
-    # intern cannot approve
     denied = client.post("/copilot/approve", headers={"X-User-Id": "intern_001"},
                          json={"draft_id": draft_id, "approve": True})
     assert denied.status_code == 403
@@ -77,18 +75,16 @@ def test_approval_flow(client):
 
 
 def test_missing_info_asks_clarifying_question():
-    result = run_copilot("ops_001", "Tạo báo cáo cho khách hàng đó.", "req_t4")
+    result = run_copilot("ops_001", "Create a report for that customer.", "req_t4")
     assert result["status"] == "needs_clarification"
-    assert "customer nào" in result["response"]
+    assert "customer" in result["response"].lower()
 
 
 def test_cross_customer_rbac_denied():
-    # sales_001 has CUS_A only; asking about customer B is a controlled denial
-    result = run_copilot("sales_001", "Tóm tắt contract customer B.", "req_t5")
+    result = run_copilot("sales_001", "Summarize contract of customer B.", "req_t5")
     assert result["status"] == "denied"
     assert result["response"] == DENIED_MESSAGE
-    # ops_001 has CUS_B access -> not denied
-    ok = run_copilot("ops_001", "Tóm tắt contract customer B.", "req_t6")
+    ok = run_copilot("ops_001", "Summarize contract of customer B.", "req_t6")
     assert ok["status"] != "denied"
 
 

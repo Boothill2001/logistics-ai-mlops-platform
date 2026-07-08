@@ -39,11 +39,11 @@ INTENT_PROMPT = """Classify the user intent into exactly one label:
 - missing_info: the target is truly unspecified (no customer name, no shipment id, no period). If a customer or shipment IS named, it is NOT missing_info.
 
 Examples:
-"Tóm tắt contract customer A." -> knowledge_search
-"Shipment SHP_00123 có nguy cơ delay không?" -> ml_prediction
-"Top 5 shipment risk cao nhất hôm nay?" -> batch_query
-"Gửi email cho customer A báo shipment sẽ trễ 3 ngày." -> dangerous_action
-"Tạo báo cáo cho khách hàng đó." -> missing_info
+"Summarize the contract of customer A." -> knowledge_search
+"Does shipment SHP_00123 have delay risk?" -> ml_prediction
+"Top 5 shipments with highest delay risk today?" -> batch_query
+"Send email to customer A about a 3-day shipment delay." -> dangerous_action
+"Create a report for that customer." -> missing_info
 
 Message: {message}
 
@@ -217,7 +217,7 @@ def final_response_node(state: CopilotState) -> CopilotState:
 
     if intent == "missing_info":
         return {"status": "needs_clarification",
-                "response": "Bạn muốn báo cáo cho customer nào và trong khoảng thời gian nào?"}
+                "response": "Which customer and what time period would you like the report for?"}
 
     if state.get("error") and not state.get("rag_text"):
         return {"status": "error", "response": state["error"]}
@@ -246,7 +246,7 @@ def final_response_node(state: CopilotState) -> CopilotState:
 
     # knowledge_search / fallback
     return {"status": state.get("status", "ok"),
-            "response": state.get("rag_text", "Không đủ dữ liệu để trả lời.")}
+            "response": state.get("rag_text", "Insufficient data to answer.")}
 
 
 def logging_audit_node(state: CopilotState) -> CopilotState:

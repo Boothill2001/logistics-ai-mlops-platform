@@ -76,7 +76,7 @@ class MockLLM(LLMProvider):
         context = prompt.split("Context:", 1)[1].split("Question:", 1)[0].strip()
         question = prompt.split("Question:", 1)[1].split("Answer:", 1)[0].strip()
         if not context:
-            return "KHONG_DU_DU_LIEU"
+            return "NO_SUFFICIENT_DATA"
         # Extractive: keep sentences sharing terms with the question
         doc_ids = re.findall(r"\[([\w\-]+)\]", context)
         q_terms = {w.lower() for w in re.findall(r"\w{4,}", question)}
@@ -84,7 +84,7 @@ class MockLLM(LLMProvider):
         hits = [s.strip() for s in sentences
                 if q_terms & {w.lower() for w in re.findall(r"\w{4,}", s)}]
         if not hits:
-            return "KHONG_DU_DU_LIEU"
+            return "NO_SUFFICIENT_DATA"
         citation = f" [{doc_ids[0]}]" if doc_ids else ""
         return " ".join(hits[:4]) + citation
 

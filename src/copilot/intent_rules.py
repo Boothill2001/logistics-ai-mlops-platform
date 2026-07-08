@@ -16,7 +16,7 @@ def classify_intent_rules(message: str) -> str:
     m = message.lower()
     if re.search(r"\b(email|notify|send|g[ửu]i|inform)\b", m):
         return "dangerous_action"
-    if re.search(r"khách hàng đó|customer đó|that customer|báo cáo cho khách", m):
+    if re.search(r"that customer|for that client|khách hàng đó|customer đó|báo cáo cho khách", m):
         return "missing_info"
     if SHIPMENT_RE.search(message):
         return "ml_prediction"

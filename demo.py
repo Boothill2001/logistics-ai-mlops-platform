@@ -63,14 +63,14 @@ def main():
 
     section("4. Copilot — 5 intents, 3 users")
     conversations = [
-        ("sales_001", "Tóm tắt contract customer A."),
-        ("intern_001", "Tóm tắt contract customer A."),           # -> denied
-        ("intern_001", "Chính sách delay compensation là gì?"),   # public doc -> ok
-        ("ops_001", "Có note private nào về customer A không?"),  # -> no leak
-        ("ops_001", "Shipment SHP_00001 có nguy cơ delay không?"),
-        ("sales_001", "Top 5 shipment có risk cao nhất hôm nay là gì?"),
-        ("ops_001", "Tạo báo cáo cho khách hàng đó."),            # -> clarify
-        ("ops_001", "Gửi email cho customer A báo shipment sẽ trễ 3 ngày."),
+        ("sales_001", "Summarize the contract of customer A."),
+        ("intern_001", "Summarize the contract of customer A."),       # -> denied
+        ("intern_001", "What is the delay compensation policy?"),      # public doc -> ok
+        ("ops_001", "Is there any private note about customer A?"),    # -> no leak
+        ("ops_001", "Does shipment SHP_00001 have delay risk?"),
+        ("sales_001", "Top 5 shipments with highest delay risk today?"),
+        ("ops_001", "Create a report for that customer."),             # -> clarify
+        ("ops_001", "Send email to customer A about a 3-day shipment delay."),
     ]
     draft_id = None
     for user_id, message in conversations:

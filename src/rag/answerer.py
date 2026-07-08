@@ -11,10 +11,10 @@ from src.auth.users import User
 from src.rag.store import DocStore, RetrievedChunk
 
 NO_DATA_MESSAGE = (
-    "Không đủ dữ liệu trong tài liệu bạn được phép truy cập để trả lời câu hỏi này."
+    "Insufficient data in the documents you have access to. Cannot answer this question."
 )
 
-ANSWER_PROMPT = """You are a logistics operations assistant. Answer the user's question using ONLY the context below. If the context does not contain the answer, reply exactly: "KHONG_DU_DU_LIEU".
+ANSWER_PROMPT = """You are a logistics operations assistant. Answer the user's question using ONLY the context below. If the context does not contain the answer, reply exactly: "NO_SUFFICIENT_DATA".
 Cite sources inline as [document_id]. Do not invent facts, numbers, or clauses.
 
 Context:
@@ -43,7 +43,7 @@ def answer_question(question: str, user: User, store: DocStore, llm) -> RagAnswe
 
     prompt = ANSWER_PROMPT.format(context=build_context(chunks), question=question)
     raw = llm.complete(prompt)
-    if "KHONG_DU_DU_LIEU" in raw:
+    if "NO_SUFFICIENT_DATA" in raw or "KHONG_DU_DU_LIEU" in raw:
         return RagAnswer(text=NO_DATA_MESSAGE, sources=[], grounded=False)
 
     sources = sorted({c.document_id for c in chunks})
