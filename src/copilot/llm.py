@@ -61,6 +61,10 @@ class MockLLM(LLMProvider):
         return "mock"
 
     def complete(self, prompt: str) -> str:
+        if "Classify the user intent" in prompt:
+            from src.copilot.intent_rules import classify_intent_rules
+            message = prompt.split("Message:", 1)[1].split("Reply with", 1)[0].strip()
+            return classify_intent_rules(message)
         if "Context:" in prompt and "Question:" in prompt:
             return self._answer_from_context(prompt)
         if "Write a professional delay notification email" in prompt:

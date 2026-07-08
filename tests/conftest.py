@@ -1,8 +1,13 @@
+import os
 import sys
 from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
+
+# Tests must be offline and deterministic — never hit a real LLM API,
+# regardless of what the local .env says. Must be set before src imports.
+os.environ["LLM_PROVIDER"] = "mock"
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
