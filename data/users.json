@@ -1,0 +1,26 @@
+[
+  {
+    "user_id": "sales_001",
+    "role": "sales",
+    "customer_access": ["CUS_A"],
+    "permission_groups": ["public", "customer_A"]
+  },
+  {
+    "user_id": "ops_001",
+    "role": "ops",
+    "customer_access": ["CUS_A", "CUS_B"],
+    "permission_groups": ["public", "customer_A", "customer_B"]
+  },
+  {
+    "user_id": "intern_001",
+    "role": "intern",
+    "customer_access": [],
+    "permission_groups": ["public"]
+  },
+  {
+    "user_id": "admin_001",
+    "role": "admin",
+    "customer_access": ["CUS_A", "CUS_B", "CUS_C", "CUS_D"],
+    "permission_groups": ["public", "customer_A", "customer_B", "admin_only"]
+  }
+]
