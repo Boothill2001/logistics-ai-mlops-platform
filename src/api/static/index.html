@@ -64,7 +64,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); heig
 .badge.pending { background: rgba(245,158,11,0.2); color: var(--amber); }
 .badge.clarify { background: rgba(59,130,246,0.2); color: var(--accent); }
 .msg .sources { font-size: 11px; color: var(--text2); margin-top: 6px; }
-.msg .approve-bar { margin-top: 10px; display: flex; gap: 8px; }
+.msg .approve-bar { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .msg .approve-bar button { padding: 6px 14px; border-radius: 6px; border: none; font-size: 12px; font-weight: 600; cursor: pointer; }
 .btn-approve { background: var(--green); color: #fff; }
 .btn-reject { background: var(--red); color: #fff; }
@@ -280,10 +280,15 @@ function addBotMsg(text, status, sources, draftId) {
     html += `<div class="sources">Sources: ${sources.join(', ')}</div>`;
   }
   if (draftId && status === 'pending_approval') {
-    html += `<div class="approve-bar">
-      <button class="btn-approve" onclick="approveDraft('${draftId}', true, this)">Approve</button>
-      <button class="btn-reject" onclick="approveDraft('${draftId}', false, this)">Reject</button>
-    </div>`;
+    const canApprove = ['ops_001', 'admin_001'].includes(currentUser);
+    if (canApprove) {
+      html += `<div class="approve-bar">
+        <button class="btn-approve" onclick="approveDraft('${draftId}', true, this)">Approve</button>
+        <button class="btn-reject" onclick="approveDraft('${draftId}', false, this)">Reject</button>
+      </div>`;
+    } else {
+      html += `<div class="approve-bar"><span class="badge denied">Only ops or admin can approve — switch user to approve this draft</span></div>`;
+    }
   }
   el.innerHTML = html;
   document.getElementById('chatMessages').appendChild(el);

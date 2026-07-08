@@ -14,7 +14,34 @@ Everything runs locally (Docker Compose or a venv). No cloud services required.
 The LLM is pluggable: DeepSeek API for real answers, a deterministic MockLLM
 for tests and offline demos.
 
+## Screenshots
+
+**Copilot Chat** — RAG answers with citations, batch analytics, RBAC denial for intern, private note leakage control:
+
+![Copilot Chat](docs/screenshots/02-copilot-chat.png)
+
+**Human-in-the-loop** — email draft with `PENDING_APPROVAL` badge, never auto-sent:
+
+![Email Draft](docs/screenshots/01-email-draft.png)
+
+**RBAC demo** — intern blocked from customer A contract; admin sees public docs only (private note filtered); delay compensation answered from public policy with sources:
+
+![RBAC Demo](docs/screenshots/03-rbac-demo.png)
+
+**Delay Prediction** — real-time ML inference with risk level, model version, latency:
+
+![Delay Prediction](docs/screenshots/04-delay-prediction.png)
+
+**Metrics Dashboard** — live Prometheus counters: request/error count, model version traffic, risk distribution:
+
+![Metrics](docs/screenshots/05-metrics.png)
+
 ## Quickstart
+
+**One-click demo** (Windows): double-click `start_demo.bat` — it sets up
+everything and opens the browser.
+
+**Manual setup:**
 
 ```bash
 python -m venv .venv && .venv/Scripts/pip install -r requirements.txt   # Windows
