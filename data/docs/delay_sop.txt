@@ -1,0 +1,31 @@
+STANDARD OPERATING PROCEDURE — SHIPMENT DELAY HANDLING (INTERNAL, ALL STAFF)
+SOP-OPS-007, version 5 — 2026-02-10
+
+PURPOSE
+Defines the steps the operations team follows when a shipment is delayed or
+predicted to be at high risk of delay.
+
+STEP 1 — DETECTION
+A shipment enters the delay workflow when either:
+(a) the ML delay-risk score is "high" (delay probability >= 0.70), or
+(b) the carrier/vessel schedule shows an ETA slip of more than 24 hours.
+
+STEP 2 — VERIFICATION (within 4 working hours)
+Ops verifies the signal: check vessel AIS position, port congestion feed, and
+carrier notice. Record the verified root cause in the TMS under one of:
+CONGESTION, WEATHER, MECHANICAL, CUSTOMS, ROLLOVER, OTHER.
+
+STEP 3 — CUSTOMER NOTIFICATION
+For confirmed delays over 24 hours: sales owner sends the customer a delay
+notice within 1 business day. The notice must state new ETA, root cause
+category, and mitigation. Email drafts may be AI-generated but MUST be
+reviewed and approved by a human before sending. Never auto-send.
+
+STEP 4 — MITIGATION
+Options in order of preference: (1) keep on vessel if slip < 48h,
+(2) re-book on next sailing, (3) transship via alternate hub,
+(4) air-freight critical partial cargo at customer's cost unless carrier fault.
+
+STEP 5 — POST-INCIDENT
+Log outcome in the TMS. If root cause was CONGESTION at a specific port more
+than 3 times in 30 days, flag the lane for the network planning review.

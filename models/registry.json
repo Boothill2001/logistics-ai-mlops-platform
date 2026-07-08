@@ -1,0 +1,28 @@
+{
+  "shipment_delay_model": {
+    "versions": {
+      "v1": {
+        "path": "shipment_delay_model_v1.joblib",
+        "stage": "production",
+        "metrics": {
+          "roc_auc": 0.9271,
+          "f1": 0.7749,
+          "n_train": 4000,
+          "n_test": 1000
+        },
+        "trained_at": "2026-07-08T10:03:09.730226+00:00"
+      },
+      "v2": {
+        "path": "shipment_delay_model_v2.joblib",
+        "stage": "canary",
+        "metrics": {
+          "roc_auc": 0.9148,
+          "f1": 0.7415,
+          "n_train": 4000,
+          "n_test": 1000
+        },
+        "trained_at": "2026-07-08T10:03:09.730226+00:00"
+      }
+    }
+  }
+}

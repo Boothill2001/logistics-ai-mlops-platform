@@ -1,0 +1,28 @@
+# API
+fastapi~=0.115
+uvicorn[standard]~=0.34
+pydantic~=2.10
+pydantic-settings~=2.8
+
+# ML
+scikit-learn~=1.6
+pandas~=2.2
+numpy~=2.2
+joblib~=1.4
+
+# Monitoring
+prometheus-client~=0.21
+
+# RAG
+chromadb~=1.0
+
+# Copilot
+langgraph~=0.4
+openai~=1.75
+
+# Utils
+python-dotenv~=1.1
+
+# Tests
+pytest~=8.3
+httpx~=0.28

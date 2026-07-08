@@ -1,0 +1,38 @@
+SERVICE CONTRACT — CUSTOMER A (CUS_A)
+Contract ID: CTR-2025-0041
+Effective: 2025-01-01 to 2026-12-31
+
+PARTIES
+This ocean freight service contract is between Pacific Line Logistics ("Carrier")
+and Customer A Trading Co., Ltd ("Customer", customer code CUS_A).
+
+SCOPE OF SERVICE
+Carrier provides FCL ocean freight on the SGN-SIN, SGN-HKG and SGN-LAX trade
+lanes. Committed volume: 1,200 TEU per contract year. Equipment: 20GP, 40GP,
+40HC containers.
+
+RATES
+- SGN-SIN: USD 450 per 40HC
+- SGN-HKG: USD 620 per 40HC
+- SGN-LAX: USD 2,850 per 40HC
+Rates include ocean freight only. THC, documentation and VGM fees are billed
+separately per the standard tariff.
+
+SERVICE LEVEL AGREEMENT
+- On-time arrival target: 85% of shipments within 24 hours of ETA.
+- If quarterly on-time performance falls below 75%, Customer A is entitled to
+  a 5% rebate on ocean freight for that quarter.
+- Booking confirmation within 8 business hours of request.
+
+DELAY COMPENSATION
+For shipments delayed more than 72 hours beyond ETA due to Carrier-controlled
+causes, Customer A receives a credit of 10% of the ocean freight for that
+shipment. Delays caused by port congestion, weather, customs or force majeure
+are excluded from compensation.
+
+PAYMENT TERMS
+Net 30 days from invoice date. Late payment interest: 1.5% per month.
+
+TERMINATION
+Either party may terminate with 90 days written notice. Committed volume
+shortfall penalty: USD 50 per TEU below commitment.

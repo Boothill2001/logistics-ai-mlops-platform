@@ -1,0 +1,28 @@
+INVOICE — CUSTOMER A (CUS_A)
+Invoice No: INV-2026-01877
+Invoice Date: 2026-06-15
+Due Date: 2026-07-15 (Net 30 per contract CTR-2025-0041)
+
+BILL TO
+Customer A Trading Co., Ltd
+88 Nguyen Hue Blvd, District 1, Ho Chi Minh City, Vietnam
+
+SHIPMENT DETAILS
+Shipment SHP_00021 — SGN to SIN, 2 x 40HC
+  Ocean freight: 2 x USD 450 = USD 900
+Shipment SHP_00034 — SGN to LAX, 1 x 40HC
+  Ocean freight: 1 x USD 2,850 = USD 2,850
+
+ADDITIONAL CHARGES
+  Terminal handling (THC), 3 containers: USD 360
+  Documentation fee: USD 90
+  VGM fee: USD 45
+
+TOTAL DUE: USD 4,245
+
+NOTES
+Shipment SHP_00034 arrived 4 days behind ETA. Root cause classified as port
+congestion at LAX — excluded from delay compensation per contract clause
+"Delay Compensation". No credit applied.
+
+Payment to Pacific Line Logistics, account 4402-118-990, SWIFT PLLOGVNX.
